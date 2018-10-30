@@ -1,16 +1,30 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { AppComponentBase } from '@shared/app-component-base';
+import { PersonServiceProxy, PersonListDto, ListResultDtoOfPersonListDto } from '@shared/service-proxies/service-proxies';
 
 @Component({  
   templateUrl: './phonebook.component.html', 
   animations: [appModuleAnimation()]
 })
-export class PhonebookComponent extends AppComponentBase {
 
-  constructor(injector: Injector) {
-    super(injector);
-  }
- 
+
+export class PhonebookComponent extends AppComponentBase implements OnInit {
+   
+    people: PersonListDto[] = [];
+    filter: string = '';
+  
+    constructor(injector: Injector, private _personService: PersonServiceProxy){
+       super(injector);
+    }
+
+      ngOnInit(): void {
+          this.getPeople();
+      }
+      getPeople(): void {
+          this._personService.getPeople(this.filter).subscribe((result) => {
+          this.people = result.items;
+      });
+    }
 }
 
