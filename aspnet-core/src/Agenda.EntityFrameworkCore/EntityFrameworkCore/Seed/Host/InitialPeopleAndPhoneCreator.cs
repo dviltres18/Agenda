@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Agenda.EntityFrameworkCore.Seed.Host
 {
-    public class InitialPeopleCreator
+    public class InitialPeopleAndPhoneCreator
     {
         private readonly AgendaDbContext _context;
 
-        public InitialPeopleCreator(AgendaDbContext context)
+        public InitialPeopleAndPhoneCreator(AgendaDbContext context)
         {
             _context = context;
         }
@@ -23,10 +23,15 @@ namespace Agenda.EntityFrameworkCore.Seed.Host
             if (douglas == null){
 
                 _context.Persons.Add(
-                new Person{
+                new Person
+                {
                     Name = "Douglas",
                     Surname = "Adams",
-                    EmailAddress = "douglas.adams@fortytwo.com"
+                    EmailAddress = "douglas.adams@fortytwo.com",
+                    Phones = new List<Phone>{
+                            new Phone {Type = PhoneType.Home, Number = "1112242"},
+                            new Phone {Type = PhoneType.Mobile, Number = "2223342"}
+                    }
                 });
             }
             var asimov = _context.Persons.FirstOrDefault(
@@ -38,7 +43,10 @@ namespace Agenda.EntityFrameworkCore.Seed.Host
                 new Person{
                     Name = "Isaac",
                     Surname = "Asimov",
-                    EmailAddress = "isaac.asimov@foundation.org"
+                    EmailAddress = "isaac.asimov@foundation.org",
+                    Phones = new List<Phone>{
+                            new Phone {Type = PhoneType.Home, Number = "8889977"}
+                    }
                 });
             }
         }

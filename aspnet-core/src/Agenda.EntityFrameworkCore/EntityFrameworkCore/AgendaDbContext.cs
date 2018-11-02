@@ -13,6 +13,8 @@ namespace Agenda.EntityFrameworkCore
 
         public virtual DbSet<Person> Persons { get; set; }
 
+        public virtual DbSet<Phone> Phones { get; set; }
+
         public AgendaDbContext(DbContextOptions<AgendaDbContext> options)
             : base(options)
         {

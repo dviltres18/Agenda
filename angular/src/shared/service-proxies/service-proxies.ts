@@ -268,6 +268,216 @@ export class PersonServiceProxy {
         }
         return _observableOf<ListResultDtoOfPersonListDto>(<any>null);
     }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    createPerson(input: CreatePersonInput | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Person/CreatePerson";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreatePerson(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreatePerson(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreatePerson(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @id (optional) 
+     * @return Success
+     */
+    deletePerson(id: number | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Person/DeletePerson?";
+        if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeletePerson(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeletePerson(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeletePerson(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @id (optional) 
+     * @return Success
+     */
+    deletePhone(id: number | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Person/DeletePhone?";
+        if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeletePhone(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeletePhone(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDeletePhone(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    addPhone(input: AddPhoneInput | null | undefined): Observable<PhoneInPersonListDto> {
+        let url_ = this.baseUrl + "/api/services/app/Person/AddPhone";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddPhone(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddPhone(<any>response_);
+                } catch (e) {
+                    return <Observable<PhoneInPersonListDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PhoneInPersonListDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddPhone(response: HttpResponseBase): Observable<PhoneInPersonListDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PhoneInPersonListDto.fromJS(resultData200) : new PhoneInPersonListDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PhoneInPersonListDto>(<any>null);
+    }
 }
 
 @Injectable()
@@ -1938,6 +2148,7 @@ export class PersonListDto implements IPersonListDto {
     name: string | undefined;
     surname: string | undefined;
     emailAddress: string | undefined;
+    phones: PhoneInPersonListDto[] | undefined;
     isDeleted: boolean | undefined;
     deleterUserId: number | undefined;
     deletionTime: moment.Moment | undefined;
@@ -1961,6 +2172,11 @@ export class PersonListDto implements IPersonListDto {
             this.name = data["name"];
             this.surname = data["surname"];
             this.emailAddress = data["emailAddress"];
+            if (data["phones"] && data["phones"].constructor === Array) {
+                this.phones = [];
+                for (let item of data["phones"])
+                    this.phones.push(PhoneInPersonListDto.fromJS(item));
+            }
             this.isDeleted = data["isDeleted"];
             this.deleterUserId = data["deleterUserId"];
             this.deletionTime = data["deletionTime"] ? moment(data["deletionTime"].toString()) : <any>undefined;
@@ -1984,6 +2200,11 @@ export class PersonListDto implements IPersonListDto {
         data["name"] = this.name;
         data["surname"] = this.surname;
         data["emailAddress"] = this.emailAddress;
+        if (this.phones && this.phones.constructor === Array) {
+            data["phones"] = [];
+            for (let item of this.phones)
+                data["phones"].push(item.toJSON());
+        }
         data["isDeleted"] = this.isDeleted;
         data["deleterUserId"] = this.deleterUserId;
         data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : <any>undefined;
@@ -2007,6 +2228,7 @@ export interface IPersonListDto {
     name: string | undefined;
     surname: string | undefined;
     emailAddress: string | undefined;
+    phones: PhoneInPersonListDto[] | undefined;
     isDeleted: boolean | undefined;
     deleterUserId: number | undefined;
     deletionTime: moment.Moment | undefined;
@@ -2015,6 +2237,167 @@ export interface IPersonListDto {
     creationTime: moment.Moment | undefined;
     creatorUserId: number | undefined;
     id: number | undefined;
+}
+
+export class PhoneInPersonListDto implements IPhoneInPersonListDto {
+    type: PhoneInPersonListDtoType | undefined;
+    number: string | undefined;
+    creationTime: moment.Moment | undefined;
+    creatorUserId: number | undefined;
+    id: number | undefined;
+
+    constructor(data?: IPhoneInPersonListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.type = data["type"];
+            this.number = data["number"];
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : <any>undefined;
+            this.creatorUserId = data["creatorUserId"];
+            this.id = data["id"];
+        }
+    }
+
+    static fromJS(data: any): PhoneInPersonListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PhoneInPersonListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["number"] = this.number;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["creatorUserId"] = this.creatorUserId;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): PhoneInPersonListDto {
+        const json = this.toJSON();
+        let result = new PhoneInPersonListDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPhoneInPersonListDto {
+    type: PhoneInPersonListDtoType | undefined;
+    number: string | undefined;
+    creationTime: moment.Moment | undefined;
+    creatorUserId: number | undefined;
+    id: number | undefined;
+}
+
+export class CreatePersonInput implements ICreatePersonInput {
+    name: string;
+    surname: string;
+    emailAddress: string | undefined;
+
+    constructor(data?: ICreatePersonInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"];
+            this.surname = data["surname"];
+            this.emailAddress = data["emailAddress"];
+        }
+    }
+
+    static fromJS(data: any): CreatePersonInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreatePersonInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["surname"] = this.surname;
+        data["emailAddress"] = this.emailAddress;
+        return data; 
+    }
+
+    clone(): CreatePersonInput {
+        const json = this.toJSON();
+        let result = new CreatePersonInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreatePersonInput {
+    name: string;
+    surname: string;
+    emailAddress: string | undefined;
+}
+
+export class AddPhoneInput implements IAddPhoneInput {
+    personId: number | undefined;
+    type: AddPhoneInputType;
+    number: string;
+
+    constructor(data?: IAddPhoneInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.personId = data["personId"];
+            this.type = data["type"];
+            this.number = data["number"];
+        }
+    }
+
+    static fromJS(data: any): AddPhoneInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddPhoneInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["personId"] = this.personId;
+        data["type"] = this.type;
+        data["number"] = this.number;
+        return data; 
+    }
+
+    clone(): AddPhoneInput {
+        const json = this.toJSON();
+        let result = new AddPhoneInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IAddPhoneInput {
+    personId: number | undefined;
+    type: AddPhoneInputType;
+    number: string;
 }
 
 export class CreateRoleDto implements ICreateRoleDto {
@@ -3582,6 +3965,18 @@ export enum IsTenantAvailableOutputState {
     _1 = 1, 
     _2 = 2, 
     _3 = 3, 
+}
+
+export enum PhoneInPersonListDtoType {
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+}
+
+export enum AddPhoneInputType {
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
 }
 
 export class SwaggerException extends Error {
