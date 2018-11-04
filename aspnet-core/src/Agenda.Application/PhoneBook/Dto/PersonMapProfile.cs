@@ -18,7 +18,7 @@ namespace Agenda.PhoneBook.Dto
             CreateMap<CreatePersonInput, Person>();
             CreateMap<Person, CreatePersonInput>();
 
-          /*  //            Edit Person
+            //            Edit Person
             CreateMap<GetPersonForEditOutput, Person>();
             CreateMap<Person, GetPersonForEditOutput>();
 
@@ -28,7 +28,7 @@ namespace Agenda.PhoneBook.Dto
 
             //           Create Phone
             CreateMap<AddPhoneInput, Phone>();
-            CreateMap<Phone, AddPhoneInput>();*/
+            CreateMap<Phone, AddPhoneInput>();
         }
     }
 }

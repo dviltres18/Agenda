@@ -42,7 +42,7 @@
                         <tr>
                             <th>{{l('Name')}}</th>
                             <th>{{l('Email Address')}}</th>    
-							 <th>{{l('Actions')}}</th>
+							<th>{{l('Actions')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,18 +50,69 @@
                             <td>{{person.name + ' ' + person.surname}}</td>
                             <td>{{person.emailAddress}}</td>
                             <td>
-                                <button id="deletePerson" (click)="deletePerson(person)" title="{{l('Delete')}}" 
-                                class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only m-btn--pill" href="javascript:;">
-                                <i class="fa fa-times"></i>
-                                </button>
+                                    <div class="col m--align-right">
+                                        <button (click)="editPerson(person)" title="{{l('Edit')}}" class="btn btn-outline-primary m-btn m-btn--icon m-btn--icon-only m-btn--pill">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                        <button (click)="editPersonModal.show(person.id)" title="{{l('EditPerson')}}" 
+                                            class="btn btnoutline-success m-btn m-btn--icon m-btn--icon-only m-btn--pill"><i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button id="deletePerson" (click)="deletePerson(person)" title="{{l('Delete')}}" class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only m-b
+                                            tn--pill" href="javascript:;"><i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
                             </td>
+                     <td>
+                        <div class="row">
+                                <div class="col-sm-12 m--margin-top-20" *ngIf="person===editingPerson">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:10%"></th>
+                                                <th style="width:35%">{{l("Type")}}</th>
+                                                <th style="width:55%">{{l("PhoneNumber")}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let phone of person.phones">
+                                                <td>
+                                                <button (click)="deletePhone(phone, person)" class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only m-btn--pill">
+                                                <i class="fa fa-times"></i>
+                                                </button>
+                                                </td>
+                                                <td>{{getPhoneTypeAsString(phone.type)}}</td>
+                                                <td>{{phone.number}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button (click)="savePhone()" class="btn btn-sm btn-success">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                <select name="Type" [(ngModel)]="newPhone.type"class="form-control">
+                                                    <option value="0">{{l("PhoneType_Mobile")}}</option>
+                                                    <option value="1">{{l("PhoneType_Home")}}</option>
+                                                    <option value="2">{{l("PhoneType_Business")}}</option>
+                                                </select>
+                                                </td>
+                                                <td><input type="text" name="number" [(ngModel)]="newPhone.number" class="form-control" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                                
+                         </td>
                         </tr>
                     </tbody>
                 </table>          
              
             </div>
         </div>
-    </div>
-	  <createPersonModal #createPersonModal (modalSave)="getPeople()"></createPersonModal>
+       
+    </div>  
+    <createPersonModal #createPersonModal (modalSave)="getPeople()"></createPersonModal> 
+    <editPersonModal #editPersonModal (modalSave)="getPeople()"></editPersonModal>
 </div>
 

@@ -34,6 +34,7 @@ import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 import { PhonebookComponent } from './phonebook/phonebook.component';
 import { CreatePersonModalComponent } from './create-person-modal/create-person-modal.component';
+import { EditPersonModalComponent } from './edit-person-modal/edit-person-modal.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { CreatePersonModalComponent } from './create-person-modal/create-person-
         SideBarFooterComponent,
         RightSideBarComponent,
         PhonebookComponent,
-        CreatePersonModalComponent
+        CreatePersonModalComponent,
+        EditPersonModalComponent
         
     
     ],

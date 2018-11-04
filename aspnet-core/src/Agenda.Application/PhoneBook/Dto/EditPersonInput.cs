@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Agenda.PhoneBook.Dto
 {
-    public class CreatePersonInput
+    public class EditPersonInput
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(PersonConsts.MaxNameLength)]
         public string Name { get; set; }

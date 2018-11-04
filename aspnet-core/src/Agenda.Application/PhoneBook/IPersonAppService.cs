@@ -20,5 +20,9 @@ namespace Agenda.PhoneBook
 
         Task<PhoneInPersonListDto> AddPhone(AddPhoneInput input);
 
+        Task<GetPersonForEditOutput> GetPersonForEdit(GetPersonForEditInput input);
+
+
+
     }
 }

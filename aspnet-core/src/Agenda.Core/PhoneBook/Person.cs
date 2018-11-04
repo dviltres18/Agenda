@@ -1,4 +1,5 @@
-﻿using Abp.Domain.Entities.Auditing;
+﻿using Abp.Domain.Entities;
+using Abp.Domain.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Text;
 namespace Agenda.PhoneBook
 {
     [Table("PbPersons")]
-    public class Person : FullAuditedEntity
+    public class Person : FullAuditedEntity, IMustHaveTenant
     {
         public const int MaxNameLength = 32;
 
@@ -16,9 +17,10 @@ namespace Agenda.PhoneBook
 
         public const int MaxEmailAddressLength = 255;
 
+        public virtual int TenantId { get; set; }
+
         [Required]
         [MaxLength(MaxNameLength)]
-
         public virtual string Name { get; set; }
 
         [Required]
